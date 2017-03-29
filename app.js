@@ -1,15 +1,21 @@
+const cluster = require('cluster')
 const phantom = require('phantom')
-const addr = 'http://boost.com/both'
-const instanceCount = 5
-const pageCount = 10
-const runs = 20
+const addr = 'https://pwa.joecode.site'
+// const addr = 'http://clever.ly'
+
+const instanceCount = 10
+const pageCount = 5
+const runs = 10
 const totalHitsToMake = (instanceCount * pageCount * runs)
-let pages = []
 let instances = []
+let pages = []
 let hits = 0
 let lastHits = 0
+let startTime
+let responseTimes = []
+let responseStatusCodes = []
 
-console.log(totalHitsToMake)
+console.log({addr, totalHitsToMake})
 
 async function go() {
     for (let i = 1; i <= instanceCount; i += 1) {
@@ -20,12 +26,16 @@ async function go() {
             pages.push(page)
         }
 
-        // process.stdout.write(i + ' ')
+            // process.stdout.write(i + ' ')
         console.log('Starting instance ' + i)
     }
 
+    startTime = Date.now()
+
     pages.forEach(page => {
         run(page)
+        // responseTimes.push(stats.responseTime)
+        // responseStatusCodes.push(stats.status)
     })
 
     let timer = setInterval(() => {
@@ -42,28 +52,29 @@ async function go() {
     }, 1000)
 }
 
-// function runz(page) {
-//     page.open(addr)
-//     .then(() => {
-//         hits += 1
-//         run(page)
-//     })
-//     .catch(err => {
-//         console.error(err)
-//     })
-// }
-
 async function run(page) {
     for (let z = 0; z < runs; z += 1) {
-        await page.open(addr)
+        let requestStartTime = Date.now()
+        let status = await page.open(addr)
+        let responseTime = (Date.now() - requestStartTime)
+
         hits += 1
+        // return {responseTime, status}
     }
 }
 
 function cleanUp() {
+    let endTime = Date.now()
+
     instances.forEach(instance => {
         instance.exit()
     })
+
+    let timeToRun = (endTime - startTime) / 1000
+    let avgHist = Math.round(totalHitsToMake / timeToRun)
+    console.log(responseTimes)
+    console.log(responseStatusCodes)
+    console.log({timeToRun, avgHist})
 }
 
 go()
