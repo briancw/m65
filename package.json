@@ -1,9 +1,12 @@
 {
   "name": "m65",
-  "version": "0.0.1",
-  "main": "index.js",
+  "version": "0.0.2",
+  "main": "app.js",
   "license": "MIT",
   "dependencies": {
     "phantom": "^4.0.1"
-  }
+  },
+  "description": "Stress testing with real browsers",
+  "repository": "https://github.com/briancw/m65",
+  "author": "Brian Whicheloe <brian@whicheloe.us>"
 }

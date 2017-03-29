@@ -1,7 +1,6 @@
 const cluster = require('cluster')
 const phantom = require('phantom')
 const addr = 'https://pwa.joecode.site'
-// const addr = 'http://clever.ly'
 
 const instanceCount = 10
 const pageCount = 5

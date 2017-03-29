@@ -1,0 +1,17 @@
+version: "3"
+services:
+    m65-1: &M65
+        image: phantom
+        build:
+            context: .
+        container_name: m65-1
+        volumes:
+            - ./:/root/app/
+            - node_modules:/root/app/node_modules
+        working_dir: /root/app/
+        command: ./start.sh
+    m65-2:
+        <<: *M65
+        container_name: m65-2
+volumes:
+    node_modules:
