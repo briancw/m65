@@ -1,4 +1,4 @@
 #!/bin/bash
-PATH=$PATH:/root/.nvm/versions/node/v7.7.4/bin
+PATH=$PATH:/root/.nvm/versions/node/v7.8.0/bin
 yarn && \
-node app.js
+node examples/simple.js

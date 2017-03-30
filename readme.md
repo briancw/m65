@@ -1,2 +1,6 @@
 # How to use
-TODO put how to use info here
+Run with Docker:
+```bash
+docker-compose build
+docker-compose up
+```

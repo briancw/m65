@@ -1,9 +1,9 @@
 const m65 = require('../index.js')
 
-let address = 'http://boost.com'
-let instanceCount = 5
+let address = 'http://isswizzleaword.info/'
+let instanceCount = 20
 let pageCount = 1 // leave as 1!
-let runs = 30
+let runs = 100
 
 m65.go({
     address,

@@ -18,6 +18,8 @@ async function go({address, instanceCount, pageCount, runs}) {
     let responseTimes = []
     let responseStatusCodes = []
 
+    console.log('\nBattlestation fully operational')
+
     pages.forEach(async page => {
         for (let z = 0; z < runs; z += 1) {
             let stats = await run(page, address)
@@ -28,12 +30,12 @@ async function go({address, instanceCount, pageCount, runs}) {
     })
 
     let timer = setInterval(async () => {
-        console.log('Total: ' + hits + ' Last: ' + (hits - lastHits))
+        console.log('Total hits: ' + hits + ' Hits per second: ' + (hits - lastHits))
         lastHits = hits
 
         if (hits === totalHitsToMake) {
             clearInterval(timer)
-            console.log('All Done')
+            console.log('\n---- Complete ----')
 
             let endTime = Date.now()
             let timeToRun = (endTime - startTime) / 1000
@@ -43,7 +45,10 @@ async function go({address, instanceCount, pageCount, runs}) {
             })
             let successCount = successes.length
 
-            console.log({timeToRun, avgHits, successCount})
+            console.log('Total time to run: ' + timeToRun + ' seconds')
+            console.log('Average hits per second: ' + avgHits)
+            console.log('Successes: ' + successCount + '/' + totalHitsToMake)
+            // console.log({timeToRun, avgHits, successCount})
 
             await cleanUp()
             console.log('Cleanup done, shutting down')
@@ -82,7 +87,6 @@ async function run(page, address) {
 
 function cleanUp() {
     let exits = instances.map((instance, i) => {
-        console.log('Cleanup', i)
         return instance.exit()
     })
 
