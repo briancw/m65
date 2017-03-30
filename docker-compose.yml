@@ -1,6 +1,6 @@
 version: "3"
 services:
-    m65-1: &M65
+    m65-1:
         image: phantom-node
         build:
             context: .
@@ -10,32 +10,5 @@ services:
             - node_modules:/root/app/node_modules
         working_dir: /root/app/
         command: ./start.sh
-    # m65-2:
-    #     <<: *M65
-    #     container_name: m65-2
-    # m65-3:
-    #     <<: *M65
-    #     container_name: m65-3
-    # m65-4:
-    #     <<: *M65
-    #     container_name: m65-4
-    # m65-5:
-    #     <<: *M65
-    #     container_name: m65-5
-    # m65-6:
-    #     <<: *M65
-    #     container_name: m65-6
-    # m65-7:
-    #     <<: *M65
-    #     container_name: m65-7
-    # m65-8:
-    #     <<: *M65
-    #     container_name: m65-8
-    # m65-9:
-    #     <<: *M65
-    #     container_name: m65-9
-    # m65-10:
-    #     <<: *M65
-    #     container_name: m65-10
 volumes:
     node_modules:

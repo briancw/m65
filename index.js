@@ -67,7 +67,6 @@ function createInstances(instanceCount, pageCount) {
                 pages.push(page)
             }
 
-                // process.stdout.write(i + ' ')
             console.log('Starting instance ' + (i + 1))
         }
 
