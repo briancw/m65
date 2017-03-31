@@ -1,14 +1,14 @@
 version: "3"
 services:
-    m65-1:
+    m65:
         image: phantom-node
         build:
             context: .
-        container_name: m65-1
+        container_name: m65
         volumes:
-            - ./:/root/app/
+            - ../../:/root/app/
             - node_modules:/root/app/node_modules
         working_dir: /root/app/
-        command: ./start.sh
+        command: ./examples/docker/start.sh
 volumes:
     node_modules:

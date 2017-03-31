@@ -12,6 +12,8 @@ Run Sample Script:
 - node examples/simple.js
 
 Run with Docker:
+- This project contains a Dockerfile and docker-compose script
+- run the following from the examples/docker folder
 ```bash
 docker-compose build
 docker-compose up

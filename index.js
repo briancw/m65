@@ -1,17 +1,17 @@
 const phantom = require('phantom')
 
-let pages = []
-let instances = []
+let tabs = []
+let browsers = []
 
-async function go({address, instanceCount, pageCount, runs}) {
-    const totalHitsToMake = (instanceCount * pageCount * runs)
+async function go({address, browserCount, tabCount, runs}) {
+    const totalHitsToMake = (browserCount * tabCount * runs)
     let hits = 0
     let lastHits = 0
 
-    console.log({address, instanceCount, pageCount, runs})
-    console.log(totalHitsToMake)
+    console.log({address, browserCount, tabCount, runs})
+    console.log('Total Hits to Attempt: ' + totalHitsToMake)
 
-    await createInstances(instanceCount, pageCount)
+    await createBrowsers(browserCount, tabCount)
 
     let startTime = Date.now()
 
@@ -20,9 +20,9 @@ async function go({address, instanceCount, pageCount, runs}) {
 
     console.log('\nBattlestation fully operational')
 
-    pages.forEach(async page => {
+    tabs.forEach(async tab => {
         for (let z = 0; z < runs; z += 1) {
-            let stats = await run(page, address)
+            let stats = await run(tab, address)
             responseTimes.push(stats.responseTime)
             responseStatusCodes.push(stats.status)
             hits += 1
@@ -56,28 +56,28 @@ async function go({address, instanceCount, pageCount, runs}) {
     }, 1000)
 }
 
-function createInstances(instanceCount, pageCount) {
+function createBrowsers(browserCount, tabCount) {
     return new Promise(async (resolve) => {
 
-        for (let i = 0; i < instanceCount; i += 1) {
-            instances[i] = await phantom.create()
+        for (let i = 0; i < browserCount; i += 1) {
+            browsers[i] = await phantom.create()
 
-            for (let i2 = 0; i2 < pageCount; i2 += 1) {
-                let page = await instances[i].createPage()
-                pages.push(page)
+            for (let i2 = 0; i2 < tabCount; i2 += 1) {
+                let tab = await browsers[i].createPage()
+                tabs.push(tab)
             }
 
-            console.log('Starting instance ' + (i + 1))
+            console.log('Starting browser ' + (i + 1))
         }
 
         resolve()
     })
 }
 
-async function run(page, address) {
+async function run(tab, address) {
     return new Promise(async resolve => {
         let requestStartTime = Date.now()
-        let status = await page.open(address)
+        let status = await tab.open(address)
         let responseTime = (Date.now() - requestStartTime)
 
         resolve({status, responseTime})
@@ -85,8 +85,8 @@ async function run(page, address) {
 }
 
 function cleanUp() {
-    let exits = instances.map((instance, i) => {
-        return instance.exit()
+    let exits = browsers.map((browser, i) => {
+        return browser.exit()
     })
 
     return Promise.all(exits)
