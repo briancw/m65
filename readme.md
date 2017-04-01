@@ -1,4 +1,6 @@
 # M65 Stress Testing Utility
+[![Code Climate](https://codeclimate.com/github/briancw/m65/badges/gpa.svg)](https://codeclimate.com/github/briancw/m65)
+
 <p align="center">
   <a href="https://yarnpkg.com/">
     <img alt="M65 Atomic Cannon" src="http://i.imgur.com/IoJ4AGS.gif" width="546">
