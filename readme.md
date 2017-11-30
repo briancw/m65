@@ -1,5 +1,6 @@
 # M65 Stress Testing Utility
 [![Code Climate](https://codeclimate.com/github/briancw/m65/badges/gpa.svg)](https://codeclimate.com/github/briancw/m65)
+[![Known Vulnerabilities](https://snyk.io/test/github/briancw/m65/badge.svg)](https://snyk.io/test/github/briancw/m65)
 
 <p align="center">
   <a href="https://yarnpkg.com/">
