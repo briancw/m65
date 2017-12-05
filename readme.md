@@ -10,9 +10,9 @@
 
 # How to use
 Run Sample Script:
-- Have node 7.8.0 or later installed
+- Have node 8.0 or later installed
 - Edit examples/simple.js with the address and params you'd like to use
-- node examples/simple.js
+- ```node examples/simple.js```
 
 Run with Docker:
 - This project contains a Dockerfile and docker-compose script
